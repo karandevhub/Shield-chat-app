@@ -41,7 +41,7 @@ Before diving into the chat app, ensure you have the following:
 1. **Clone the Repository:**
 
     ```bash
-    [https://github.com/karandevhub/Shield-chat-app.git]
+    https://github.com/karandevhub/Shield-chat-app.git
     ```
 
 2. **Install Dependencies:**

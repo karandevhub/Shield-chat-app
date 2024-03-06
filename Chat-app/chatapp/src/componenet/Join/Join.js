@@ -12,6 +12,7 @@ const Join = () => {
   const [name, setName] = useState("");
   console.log(name);
   return (
+    <body>
     <div className="container">
       <h1>Join Chat</h1>
       <form>
@@ -29,6 +30,7 @@ const Join = () => {
         </Link>
       </form>
     </div>
+    </body>
   );
 };
 

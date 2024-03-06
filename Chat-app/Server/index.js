@@ -29,7 +29,13 @@ io.on('connection',(socket)=>{
     
     })
 
-    socket.on('disconnect',()=>{
+    socket.on('message',({message,id})=>{
+        console.log(message)
+        io.emit('sendMessage',{user:users[id],message,id})
+        socket.broadcast.emit('message',message)
+    })
+
+    socket.on('disconnects',()=>{
         console.log(`${users[socket.id]} has disconnected`)
         socket.broadcast.emit("userleft",{user:"Admin",message:`${users[socket.id]} has left`})
         delete users[socket.id]

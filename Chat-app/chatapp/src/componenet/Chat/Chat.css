@@ -1,12 +1,12 @@
-/* Chat.css */
-
 /* ChatPage Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
+
+
 
 .chatPage {
     background-color: #2c3e50;
@@ -21,7 +21,8 @@ body {
 .chatContainer {
     background-color: #ecf0f1;
     height: 80%;
-    width: 80%;
+    width: 100%;
+    max-width: 50%;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -31,8 +32,8 @@ body {
 
 /* Header Styles */
 .header {
-    background-color: #e74c3c;
-    height: 15%;
+    background-color: #F44336;
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,6 +47,7 @@ body {
 }
 
 .header img {
+    width: 30PX;
     margin: 0;
     transition: all 0.3s;
     cursor: pointer;
@@ -64,9 +66,11 @@ body {
 
 /* InputBox Styles */
 .inputBox {
-    height: 15%;
+    background-color: #acd2dc;
+    height: 10%;
     display: flex;
-    padding: 0 20px;
+    padding: 0 15px;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #chatInput {
@@ -75,23 +79,34 @@ body {
     padding: 15px;
     background-color: #ecf0f1;
     outline: none;
-    font-size: 1.2vmax;
-    border-top: 2px solid #bdc3c7;
-    border-bottom-left-radius: 10px;
+    margin: 10PX;
+    font-family: sans-serif;
+    border: 2px solid #bdc3c7;
+    border-radius: 10px;
+}
+
+input, select {
+    font-size: 15px;
+    font-family: Tahoma;
 }
 
 .sendBtn {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #e74c3c;
     color: #ffffff;
     border: none;
-    width: 20%;
-    border-top-right-radius: 10px;
+    width: 10%;
+    margin: 10px 0;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
 }
 
 .sendBtn img {
-    width: 2.5vmax;
+    width: 2vmax;
     filter: brightness(100) invert();
     transition: all 0.3s;
 }

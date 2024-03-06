@@ -10,18 +10,36 @@ import closeIcon from "../../images/closeIcon.png";
 let socket;
 
 const ENDPOINT = "http://localhost:4000/";
+const SPAM_ENDPOINT = "http://127.0.0.1:5000/predict";
+
 
 const Chat = () => {
     const [id, setid] = useState("");
     const [messages, setMessages] = useState([])
 
-    const send = () => {
+    const send = async() => {
+        
         const message = document.getElementById('chatInput').value;
-        socket.emit('message', { message, id });
+     
+        const response = await fetch(SPAM_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+            }),
+        });
+        const data = await response.json();
+        const isSpam = data.prediction
+        console.log('Data:',isSpam );
+        
+
+        socket.emit('message', { message, id, isSpam });
         document.getElementById('chatInput').value = "";
     }
 
-    console.log(messages);
+   
     useEffect(() => {
         socket = io(ENDPOINT, { transports: ['websocket'] });
 
@@ -56,7 +74,6 @@ const Chat = () => {
     useEffect(() => {
         socket.on('sendMessage', (data) => {
             setMessages([...messages, data]);
-            console.log(data.user, data.message, data.id);
         })
         return () => {
             socket.off();
@@ -67,14 +84,14 @@ const Chat = () => {
         <div className="chatPage">
             <div className="chatContainer">
                 <div className="header">
-                    <h2>C CHAT</h2>
+                    <h2>Messaging</h2>
                     <a href="/"> <img src={closeIcon} alt="Close" /></a>
                 </div>
                 <ReactScrollToBottom className="chatBox">
-                    {messages.map((item, i) => <Message user={item.id === id ? '' : item.user} message={item.message} classs={item.id === id ? 'right' : 'left'} />)}
+                    {messages.map((item, i) => <Message user={item.id === id ? '' : item.user} message={item.message} classs={item.id === id ? 'right' : 'left'} isSpam={item.id===id ? "":item.isSpam}/>)}
                 </ReactScrollToBottom>
                 <div className="inputBox">
-                    <input onClick={(event) => event.key === 'Enter' ? send() : null} type="text" id="chatInput" />
+                    <input  onKeyDown={(event) => event.key === 'Enter' ? send() : null} type="text" id="chatInput" />
                     <button onClick={send} className="sendBtn"><img src={sendLogo} alt="Send" /></button>
                 </div>
             </div>

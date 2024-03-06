@@ -24,14 +24,14 @@ io.on('connection',(socket)=>{
     socket.on('joined',({user})=>{
         users[socket.id] = user
         console.log(`${user} is now connected`)
-        socket.emit("welcome", {user:"Admin",message:`welcome to the chat,${users[socket.id]}`})
+        socket.emit("welcome", {user:"Admin",message:`welcome to the chat, ${users[socket.id]}`})
         socket.broadcast.emit("userjoined",{user:"Admin",message:`${users[socket.id]} has now joined`})
     
     })
 
-    socket.on('message',({message,id})=>{
+    socket.on('message',({message,id, isSpam})=>{
         console.log(message)
-        io.emit('sendMessage',{user:users[id],message,id})
+        io.emit('sendMessage',{user:users[id],message,id,isSpam})
         socket.broadcast.emit('message',message)
     })
 
